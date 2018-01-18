@@ -24,5 +24,6 @@ else
 			run_cmd="${run_cmd} -j ${resolved_result}:29015"
 		fi
 	fi
+	echo "Running command: ${run_cmd}"
 	exec $run_cmd
 fi
