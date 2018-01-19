@@ -6,6 +6,10 @@ if [ ${#cmd} -ge 1 ]; then
 else
 	canonical_address=$(hostname -i)
 	echo "canonical_address: ${canonical_address}"
+	ip_a=$(ip a)
+	echo "ip a: ${ip_a}"
+	fqdn=$(hostname -i --fqdn)
+	echo "fqdn: ${fqdn}"
 	run_cmd="/usr/bin/rethinkdb --bind all"
 	run_cmd="${run_cmd} -d /data"
 	run_cmd="${run_cmd} --canonical-address ${canonical_address}:29015"
