@@ -5,11 +5,13 @@ if [ ${#cmd} -ge 1 ]; then
 	exec "$@"
 else
 	canonical_address=$(hostname -i)
+	echo "canonical_address: ${canonical_address}"
 	run_cmd="/usr/bin/rethinkdb --bind all"
 	run_cmd="${run_cmd} -d /data"
 	run_cmd="${run_cmd} --canonical-address ${canonical_address}:29015"
 	if [ -n "$JOIN" ]; then
 		join_resolved=$(eval "getent hosts ${JOIN}" | awk '{ print $1}')
+		echo "join_resolved: ${join_resolved}"
 		# ensure that we're not trying to join ourselves
 		resolved_result=""
 		for i in $join_resolved; do
@@ -19,6 +21,7 @@ else
 		done
 		# ensure we're only trying to join a single IP
 		resolved_result=$(echo "$resolved_result" | awk '{ print $1 }')
+		echo "resolved_result: ${resolved_result}"
 		# only add join part of command if another IP remaining
 		if [ -n "$resolved_result" ]; then
 			run_cmd="${run_cmd} -j ${resolved_result}:29015"
