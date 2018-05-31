@@ -1,5 +1,8 @@
 #!/bin/bash -e
 
+# wait for Rancher IP to be assigned
+sleep 5
+
 cmd="$@"
 if [ ${#cmd} -ge 1 ]; then
 	exec "$@"
