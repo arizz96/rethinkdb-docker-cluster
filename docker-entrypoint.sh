@@ -13,6 +13,8 @@ else
 
 	run_cmd="/usr/bin/rethinkdb --bind all"
 	run_cmd="${run_cmd} -d /data"
+	run_cmd="${run_cmd} --cache-size ${CACHE_SIZE:-auto}"
+
 	arr_canonical_address=(${canonical_address})
 	for addr in "${arr_canonical_address[@]}"; do
 		run_cmd="${run_cmd} --canonical-address ${addr}:29015"
